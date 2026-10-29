@@ -1,9 +1,9 @@
 {
     "properties.heading": "屬性",
     "properties.read-only": "唯讀",
-    "properties.aria-label": "RunPad：{{heading}}，{{readOnly}}",
+    "properties.aria-label": "Invoklet：{{heading}}，{{readOnly}}",
     "placeholder.title": "標題",
     "placeholder.description": "描述 — Markdown、清單、連結",
     "placeholder.documentation": "附加文件",
-    "notice.invalid-structure": "無法辨識 .rpad 結構。編輯已鎖定。"
+    "notice.invalid-structure": "無法辨識 .inv 結構。編輯已鎖定。"
 }

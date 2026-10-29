@@ -1,12 +1,12 @@
-// Packs dist/ into dist/runpad-markdown.zip for manual installation: the archive holds one
-// folder, runpad-markdown/, ready to be unpacked into <vault>/.obsidian/plugins/.
+// Packs dist/ into dist/invoklet-markdown.zip for manual installation: the archive holds one
+// folder, invoklet-markdown/, ready to be unpacked into <vault>/.obsidian/plugins/.
 // Pure Node (no zip tool or dependencies), so it behaves the same on every OS and in CI.
 const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
 
 const dist = path.join(__dirname, 'dist');
-const FOLDER = 'runpad-markdown';
+const FOLDER = 'invoklet-markdown';
 const FILES = ['main.js', 'manifest.json', 'styles.css'];
 const ARCHIVE = path.join(dist, FOLDER + '.zip');
 

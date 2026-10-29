@@ -1,7 +1,7 @@
 {
-    "name": "obsidian-rpad",
+    "name": "obsidian-invoklet",
     "private": true,
-    "description": "RunPad Markdown: Obsidian plugin for .rpad files. Version lives in manifest.json.",
+    "description": "Invoklet Markdown: Obsidian plugin for .inv files. Version lives in manifest.json.",
     "license": "MIT",
     "scripts": {
         "build": "node build.cjs",

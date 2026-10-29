@@ -1,9 +1,9 @@
 {
     "properties.heading": "Atrybuty",
     "properties.read-only": "tylko do odczytu",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Tytuł",
     "placeholder.description": "Opis — Markdown, listy, linki",
     "placeholder.documentation": "Dodatkowa dokumentacja",
-    "notice.invalid-structure": "Nie rozpoznano struktury pliku .rpad. Edycja jest zablokowana."
+    "notice.invalid-structure": "Nie rozpoznano struktury pliku .inv. Edycja jest zablokowana."
 }

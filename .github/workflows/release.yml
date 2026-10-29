@@ -33,19 +33,19 @@ jobs:
             echo "::error::versions.json has no entry \"$version\": \"$min_app\". Run npm run build and commit."; exit 1
           fi
 
-      # Builds dist/ (main.js, manifest.json, styles.css) and dist/runpad-markdown.zip, runs tests.
+      # Builds dist/ (main.js, manifest.json, styles.css) and dist/invoklet-markdown.zip, runs tests.
       - name: Build, package and test
         run: npm run check
 
       # The three separate files are what Obsidian's plugin directory and tools like BRAT expect;
       # the archive is for manual installation (unpack into <vault>/.obsidian/plugins/).
-      # Its name has no version, so releases/latest/download/runpad-markdown.zip always works.
+      # Its name has no version, so releases/latest/download/invoklet-markdown.zip always works.
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            dist/runpad-markdown.zip dist/main.js dist/manifest.json dist/styles.css \
+            dist/invoklet-markdown.zip dist/main.js dist/manifest.json dist/styles.css \
             --title "$GITHUB_REF_NAME" \
             --generate-notes \
             --verify-tag

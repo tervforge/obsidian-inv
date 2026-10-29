@@ -1,9 +1,9 @@
 {
     "properties.heading": "속성",
     "properties.read-only": "읽기 전용",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "제목",
     "placeholder.description": "설명 — Markdown, 목록, 링크",
     "placeholder.documentation": "추가 문서",
-    "notice.invalid-structure": ".rpad 구조를 인식할 수 없습니다. 편집이 잠겨 있습니다."
+    "notice.invalid-structure": ".inv 구조를 인식할 수 없습니다. 편집이 잠겨 있습니다."
 }

@@ -31,6 +31,59 @@ function loadBundle(language = 'en') {
  return module.exports.localize;
 }
 
+test('only .inv files receive registration, editor decorations, protection and properties', () => {
+ const code = fs.readFileSync(path.join(__dirname, 'dist', 'main.js'), 'utf8');
+ const extensions = [], registered = [], none = Symbol('no decorations');
+ const infoField = {};
+ class Plugin {
+  registerExtensions(names, view) { registered.push({ names: [...names], view }); }
+  registerEditorExtension(extension) { extensions.push(extension); }
+  registerEvent() {}
+ }
+ class MarkdownView {}
+ const obsidian = { Plugin, MarkdownView, editorInfoField: infoField, parseYaml: () => ({}),
+  getLanguage: () => 'en' };
+ const stubs = {
+  obsidian,
+  '@codemirror/state': { StateField: { define: value => value },
+   EditorState: { changeFilter: { of: value => value } }, Transaction: { remote: {}, userEvent: {} } },
+  '@codemirror/view': { WidgetType: class {}, Decoration: { none, set: () => ({ ranges: [] }) },
+   EditorView: { decorations: { from() {} } } }
+ };
+ const module = { exports: {} };
+ vm.runInNewContext(code, { module, exports: module.exports, require: name => stubs[name], queueMicrotask });
+ const plugin = new module.exports();
+ let currentView;
+ plugin.app = { workspace: { on() {}, onLayoutReady() {},
+  iterateAllLeaves: visit => { if (currentView) visit({ view: currentView }); } } };
+ plugin.onload();
+ assert.deepEqual(registered, [{ names: ['inv'], view: 'markdown' }]);
+ for (const extension of ['inv', 'INV', 'rpad', 'md']) {
+  const enabled = extension.toLowerCase() === 'inv';
+  const file = { extension, path: 'script.' + extension };
+  const state = { field: key => key === infoField ? { file } : undefined,
+   doc: { length: 7, toString: () => 'invalid' } };
+  assert.equal(extensions[0].create(state).decorations !== none, enabled, extension + ' decorations');
+  const transaction = { docChanged: true, startState: state,
+   newDoc: { toString: () => 'changed' }, annotation: () => undefined,
+   changes: { iterChanges: visit => visit(0, 7, 0, 7, { length: 7 }) } };
+  assert.equal(extensions[1](transaction), !enabled, extension + ' edit protection');
+  let protectedState;
+  const summary = { dataset: { path: file.path, yaml: 'INVALID' }, remove() {} };
+  const root = { isConnected: true,
+   classList: { toggle: (name, value) => { assert.equal(name, 'invoklet-protected'); protectedState = value; },
+    remove() {} },
+   querySelector: selector => selector === '.invoklet-properties' ? summary : null,
+   ownerDocument: { defaultView: { MutationObserver: class { observe() {} disconnect() {} } } } };
+  summary.parentElement = root;
+  currentView = Object.assign(new MarkdownView(), { file, containerEl: root, contentEl: root,
+   editor: { getValue: () => 'invalid' }, getMode: () => 'source' });
+  plugin.refreshViews();
+  assert.equal(protectedState, enabled, extension + ' properties');
+ }
+ plugin.onunload();
+});
+
 test('strings follow the Obsidian language', () => {
  assert.equal(loadBundle('ru')('properties.heading'), 'Свойства');
  assert.equal(loadBundle('de')('properties.heading'), 'Eigenschaften');
@@ -50,8 +103,8 @@ test('regional and unknown languages fall back to the base language, then Englis
 test('placeholders are interpolated', () => {
  const t = loadBundle('ru');
  assert.equal(t('properties.aria-label', { heading: 'Свойства', readOnly: 'только для чтения' }),
-  'RunPad: Свойства, только для чтения');
- assert.equal(t('properties.aria-label', { heading: 'X' }), 'RunPad: X, {{readOnly}}');
+  'Invoklet: Свойства, только для чтения');
+ assert.equal(t('properties.aria-label', { heading: 'X' }), 'Invoklet: X, {{readOnly}}');
 });
 
 test('manifest.json and versions.json agree', () => {
@@ -64,7 +117,7 @@ test('package.cjs builds an installable, reproducible archive from dist/', () =>
  const { execFileSync } = require('node:child_process');
  const zlib = require('node:zlib');
  const dist = path.join(__dirname, 'dist');
- const archive = path.join(dist, 'runpad-markdown.zip');
+ const archive = path.join(dist, 'invoklet-markdown.zip');
  execFileSync(process.execPath, [path.join(__dirname, 'package.cjs')]);
  const zip = fs.readFileSync(archive);
  // Read the central directory and unpack every entry with zlib.
@@ -80,7 +133,7 @@ test('package.cjs builds an installable, reproducible archive from dist/', () =>
   at += 46 + nameLength + zip.readUInt16LE(at + 30) + zip.readUInt16LE(at + 32);
  }
  assert.deepEqual(Object.keys(files).sort(),
-  ['runpad-markdown/main.js', 'runpad-markdown/manifest.json', 'runpad-markdown/styles.css']);
+  ['invoklet-markdown/main.js', 'invoklet-markdown/manifest.json', 'invoklet-markdown/styles.css']);
  for (const [name, data] of Object.entries(files))
   assert.ok(data.equals(fs.readFileSync(path.join(dist, path.basename(name)))), name);
  execFileSync(process.execPath, [path.join(__dirname, 'package.cjs')]);

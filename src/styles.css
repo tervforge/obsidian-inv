@@ -1,25 +1,25 @@
-/* Read-only properties replace Obsidian's editable widget only in .rpad documents. */
-.runpad-protected .metadata-container { display: none !important; }
-.runpad-properties { margin: 8px 0 8px; color: var(--text-normal); user-select: text; }
-.view-content > .runpad-properties { margin: 12px 24px; flex: 0 0 auto; }
-.runpad-properties > summary { cursor: pointer; font-size: var(--font-ui-medium);
+/* Read-only properties replace Obsidian's editable widget only in .inv documents. */
+.invoklet-protected .metadata-container { display: none !important; }
+.invoklet-properties { margin: 8px 0 8px; color: var(--text-normal); user-select: text; }
+.view-content > .invoklet-properties { margin: 12px 24px; flex: 0 0 auto; }
+.invoklet-properties > summary { cursor: pointer; font-size: var(--font-ui-medium);
     font-weight: var(--font-medium); color: var(--text-muted); padding: 4px 0; }
-.runpad-properties table { width: 100%; border-collapse: collapse; margin: 8px 0 0;
+.invoklet-properties table { width: 100%; border-collapse: collapse; margin: 8px 0 0;
     font-size: var(--font-ui-small); background: transparent; }
-.runpad-properties th, .runpad-properties td { border: 0 !important; padding: 6px 12px;
+.invoklet-properties th, .invoklet-properties td { border: 0 !important; padding: 6px 12px;
     text-align: start; vertical-align: top; background: transparent !important; }
-.runpad-properties th { width: 34%; color: var(--text-muted); font-weight: normal; }
-.runpad-properties td { white-space: pre-wrap; overflow-wrap: anywhere; }
-.runpad-properties pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
+.invoklet-properties th { width: 34%; color: var(--text-muted); font-weight: normal; }
+.invoklet-properties td { white-space: pre-wrap; overflow-wrap: anywhere; }
+.invoklet-properties pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
 
 /* Hide only delimiter glyphs. Keep Obsidian's native lines, padding, font and syntax. */
-.runpad-protected .runpad-fence-text,
-.runpad-protected .runpad-fence-text * { opacity: 0 !important; }
+.invoklet-protected .invoklet-fence-text,
+.invoklet-protected .invoklet-fence-text * { opacity: 0 !important; }
 
 /* Placeholders behave like HTML input placeholders: shown inline where the text will go,
    the caret stays before them, they add no height and are never saved to the file. */
-.runpad-protected .cm-line.runpad-section-title { margin-block: 0 !important; padding-top: 0 !important; }
-.runpad-protected .runpad-placeholder {
+.invoklet-protected .cm-line.invoklet-section-title { margin-block: 0 !important; padding-top: 0 !important; }
+.invoklet-protected .invoklet-placeholder {
     /* Same approach as CodeMirror's own placeholder. No overflow clipping: it would move
        the inline-block baseline and change the height of heading lines. */
     display: inline-block; vertical-align: top;
@@ -27,46 +27,46 @@
 }
 /* CodeMirror puts a zero-width 1em "widget buffer" next to inline widgets, aligned to
    text-top; in a large heading font it sticks out below the line and adds height. */
-.runpad-protected .cm-line.runpad-section-empty > .cm-widgetBuffer { vertical-align: top; }
+.invoklet-protected .cm-line.invoklet-section-empty > .cm-widgetBuffer { vertical-align: top; }
 
 /* A missing section is offered as a button with the metrics of the line a click creates,
    so the layout does not move when the section appears. */
-.runpad-protected .runpad-section-placeholder {
+.invoklet-protected .invoklet-section-placeholder {
     all: unset; box-sizing: border-box; display: block; width: 100%; cursor: text;
     font-family: var(--font-text); font-size: var(--font-text-size);
     line-height: var(--line-height-normal);
 }
-.runpad-protected .runpad-section-placeholder-title {
+.invoklet-protected .invoklet-section-placeholder-title {
     font-family: var(--h1-font); font-size: var(--h1-size); font-weight: var(--h1-weight);
     line-height: var(--h1-line-height);
 }
-.runpad-protected .runpad-section-placeholder-intro,
-.runpad-protected .runpad-section-placeholder-outro {
-    /* Same reserved padding and border as .runpad-block-first / .runpad-block-last. */
+.invoklet-protected .invoklet-section-placeholder-intro,
+.invoklet-protected .invoklet-section-placeholder-outro {
+    /* Same reserved padding and border as .invoklet-block-first / .invoklet-block-last. */
     padding-block: 10px; border-block: 1px dashed transparent;
 }
 
 /* Show the actual document heading once, rather than also displaying its file name. */
-.runpad-protected .inline-title { display: none !important; }
+.invoklet-protected .inline-title { display: none !important; }
 
 /* Keep Markdown transparent; reserve border space to avoid jumps when editing. */
-.runpad-protected .cm-line.runpad-markdown-block {
+.invoklet-protected .cm-line.invoklet-markdown-block {
     background: transparent !important; border: 0; padding-inline: 0;
 }
-.runpad-protected .cm-line.runpad-block-first {
+.invoklet-protected .cm-line.invoklet-block-first {
     padding-top: 10px; border-top: 1px dashed transparent; border-radius: 0;
 }
-.runpad-protected .cm-line.runpad-block-last {
+.invoklet-protected .cm-line.invoklet-block-last {
     padding-bottom: 10px; border-bottom: 1px dashed transparent; border-radius: 0;
 }
-.runpad-protected .cm-editor.cm-focused .cm-content:has(.runpad-markdown-intro.cm-activeLine) .runpad-markdown-intro.runpad-block-first,
-.runpad-protected .cm-editor.cm-focused .cm-content:has(.runpad-markdown-outro.cm-activeLine) .runpad-markdown-outro.runpad-block-first {
+.invoklet-protected .cm-editor.cm-focused .cm-content:has(.invoklet-markdown-intro.cm-activeLine) .invoklet-markdown-intro.invoklet-block-first,
+.invoklet-protected .cm-editor.cm-focused .cm-content:has(.invoklet-markdown-outro.cm-activeLine) .invoklet-markdown-outro.invoklet-block-first {
     border-top-color: var(--text-faint);
 }
-.runpad-protected .cm-editor.cm-focused .cm-content:has(.runpad-markdown-intro.cm-activeLine) .runpad-markdown-intro.runpad-block-last,
-.runpad-protected .cm-editor.cm-focused .cm-content:has(.runpad-markdown-outro.cm-activeLine) .runpad-markdown-outro.runpad-block-last {
+.invoklet-protected .cm-editor.cm-focused .cm-content:has(.invoklet-markdown-intro.cm-activeLine) .invoklet-markdown-intro.invoklet-block-last,
+.invoklet-protected .cm-editor.cm-focused .cm-content:has(.invoklet-markdown-outro.cm-activeLine) .invoklet-markdown-outro.invoklet-block-last {
     border-bottom-color: var(--text-faint);
 }
 /* Keyboard focus only recolours the already reserved border, so nothing shifts. */
-.runpad-protected .runpad-section-placeholder:focus-visible { border-block-color: var(--text-faint); }
-.runpad-protected .runpad-section-placeholder-title:focus-visible { outline: 1px dashed var(--text-faint); }
+.invoklet-protected .invoklet-section-placeholder:focus-visible { border-block-color: var(--text-faint); }
+.invoklet-protected .invoklet-section-placeholder-title:focus-visible { outline: 1px dashed var(--text-faint); }
