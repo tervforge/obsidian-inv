@@ -19,8 +19,8 @@ The user guide has a page about it:
 
 ## Installation / update
 
-1. Download [**invoklet-markdown.zip**](https://github.com/tervforge/obsidian-rpad/releases/latest/download/invoklet-markdown.zip)
-   from the [latest release](https://github.com/tervforge/obsidian-rpad/releases/latest).
+1. Download [**invoklet-markdown.zip**](https://github.com/tervforge/obsidian-inv/releases/latest/download/invoklet-markdown.zip)
+   from the [latest release](https://github.com/tervforge/obsidian-inv/releases/latest).
 2. Unpack it into `<vault>/.obsidian/plugins/`, so that you get
    `<vault>/.obsidian/plugins/invoklet-markdown/` with `main.js`, `manifest.json` and
    `styles.css` inside; replace an older copy when updating. (Each release also has the three
