@@ -1,9 +1,9 @@
 {
     "properties.heading": "Eigenschappen",
     "properties.read-only": "alleen-lezen",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Titel",
     "placeholder.description": "Beschrijving — Markdown, lijsten, links",
     "placeholder.documentation": "Aanvullende documentatie",
-    "notice.invalid-structure": "De .rpad-structuur is niet herkend. Bewerken is vergrendeld."
+    "notice.invalid-structure": "De .inv-structuur is niet herkend. Bewerken is vergrendeld."
 }

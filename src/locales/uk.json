@@ -1,9 +1,9 @@
 {
     "properties.heading": "Властивості",
     "properties.read-only": "тільки читання",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Назва",
     "placeholder.description": "Опис — Markdown, списки, посилання",
     "placeholder.documentation": "Додаткова документація",
-    "notice.invalid-structure": "Структуру .rpad не розпізнано. Редагування заблоковано."
+    "notice.invalid-structure": "Структуру .inv не розпізнано. Редагування заблоковано."
 }

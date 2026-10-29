@@ -27,6 +27,6 @@ jobs:
       # Lets you download a build of any commit from the run's summary page.
       - uses: actions/upload-artifact@v4
         with:
-          name: runpad-markdown
-          path: dist/runpad-markdown.zip
+          name: invoklet-markdown
+          path: dist/invoklet-markdown.zip
           if-no-files-found: error

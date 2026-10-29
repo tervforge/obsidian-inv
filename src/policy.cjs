@@ -14,7 +14,7 @@ function inspect(text) {
     const yamlEnd = lines[end].to;
     const languageMatch = text.slice(lines[0].to, lines[end].from).match(/^language\s*:\s*(?:["']?)(csharp|vb)(?:["']?)[ \t]*(?:#.*)?$/im);
     const language = (languageMatch?.[1] || "csharp").toLowerCase();
-    // Match RunPad's line-based run fence rules, rather than interpreting arbitrary code blocks.
+    // Match Invoklet's line-based run fence rules, rather than interpreting arbitrary code blocks.
     const runs = lines.filter((line, i) => i > end && /^```(?:csharp|vb)\s+run$/i.test(line.value));
     if (runs.length !== 1 || !new RegExp("^```" + language + "\\s+run$", "i").test(runs[0].value)) return null;
     const open = runs[0];

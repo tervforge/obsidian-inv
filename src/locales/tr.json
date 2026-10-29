@@ -1,9 +1,9 @@
 {
     "properties.heading": "Özellikler",
     "properties.read-only": "salt okunur",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Başlık",
     "placeholder.description": "Açıklama — Markdown, listeler, bağlantılar",
     "placeholder.documentation": "Ek belgeler",
-    "notice.invalid-structure": ".rpad yapısı tanınmadı. Düzenleme kilitli."
+    "notice.invalid-structure": ".inv yapısı tanınmadı. Düzenleme kilitli."
 }

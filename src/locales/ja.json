@@ -1,9 +1,9 @@
 {
     "properties.heading": "プロパティ",
     "properties.read-only": "読み取り専用",
-    "properties.aria-label": "RunPad: {{heading}}、{{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}、{{readOnly}}",
     "placeholder.title": "タイトル",
     "placeholder.description": "説明 — Markdown、リスト、リンク",
     "placeholder.documentation": "追加ドキュメント",
-    "notice.invalid-structure": ".rpad の構造を認識できませんでした。編集はロックされています。"
+    "notice.invalid-structure": ".inv の構造を認識できませんでした。編集はロックされています。"
 }

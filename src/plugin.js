@@ -5,9 +5,9 @@ const { Decoration, EditorView, WidgetType } = require("@codemirror/view");
 const policy = POLICY_IMPLEMENTATION;
 const { t } = I18N_IMPLEMENTATION;
 
-class RunPadMarkdown extends Plugin {
+class InvokletMarkdown extends Plugin {
     onload() {
-        this.registerExtensions(["rpad"], "markdown");
+        this.registerExtensions(["inv"], "markdown");
         this.tracked = new Set();
         this.observers = new Map();
         // Preserve native code-block line layout. Replacing whole fence lines merges visual
@@ -24,10 +24,10 @@ class RunPadMarkdown extends Plugin {
                 // Rendered with the same metrics as the line the click creates, so the
                 // document does not jump when the section appears.
                 const button = view.dom.ownerDocument.createElement("button");
-                button.className = "runpad-section-placeholder runpad-section-placeholder-" + this.kind;
+                button.className = "invoklet-section-placeholder invoklet-section-placeholder-" + this.kind;
                 button.type = "button";
                 const label = view.dom.ownerDocument.createElement("span");
-                label.className = "runpad-placeholder";
+                label.className = "invoklet-placeholder";
                 label.textContent = this.label;
                 button.append(label);
                 button.addEventListener("click", () => {
@@ -48,7 +48,7 @@ class RunPadMarkdown extends Plugin {
             eq(other) { return this.label === other.label; }
             toDOM(view) {
                 const span = view.dom.ownerDocument.createElement("span");
-                span.className = "runpad-placeholder";
+                span.className = "invoklet-placeholder";
                 span.setAttribute("aria-hidden", "true");
                 span.textContent = this.label;
                 return span;
@@ -58,12 +58,12 @@ class RunPadMarkdown extends Plugin {
         }
         const fenceDecorations = state => {
             const info = state.field(editorInfoField, false);
-            if (info?.file?.extension?.toLowerCase() !== "rpad") return Decoration.none;
+            if (info?.file?.extension?.toLowerCase() !== "inv") return Decoration.none;
             const text = state.doc.toString();
             const parsed = policy.inspect(text);
             const ranges = policy.fenceTextRanges(text, parsed);
             const decorations = ranges.map(({ from, to }) =>
-                Decoration.mark({ class: "runpad-fence-text" }).range(from, to));
+                Decoration.mark({ class: "invoklet-fence-text" }).range(from, to));
             const parts = policy.sections(text, parsed);
             if (parts) {
                 const eol = text.includes("\r\n") ? "\r\n" : "\n";
@@ -73,9 +73,9 @@ class RunPadMarkdown extends Plugin {
                     for (let number = first; number <= last; number++) {
                         const line = state.doc.line(number);
                         decorations.push(Decoration.line({ attributes: {
-                            class: "runpad-markdown-block runpad-markdown-" + kind
-                                + (number === first ? " runpad-block-first" : "")
-                                + (number === last ? " runpad-block-last" : "")
+                            class: "invoklet-markdown-block invoklet-markdown-" + kind
+                                + (number === first ? " invoklet-block-first" : "")
+                                + (number === last ? " invoklet-block-last" : "")
                         } }).range(line.from));
                     }
                 };
@@ -84,8 +84,8 @@ class RunPadMarkdown extends Plugin {
                 const reserveLine = (position, label, placeholderAt, kind) => {
                     const line = state.doc.lineAt(position);
                     decorations.push(Decoration.line({ attributes: {
-                        class: "runpad-pinned-section runpad-section-" + kind
-                            + (placeholderAt !== null ? " runpad-section-empty" : "")
+                        class: "invoklet-pinned-section invoklet-section-" + kind
+                            + (placeholderAt !== null ? " invoklet-section-empty" : "")
                     } }).range(line.from));
                     if (placeholderAt !== null) decorations.push(Decoration.widget({
                         widget: new Placeholder(label), side: 1 }).range(placeholderAt));
@@ -128,7 +128,7 @@ class RunPadMarkdown extends Plugin {
         }));
         this.registerEditorExtension(EditorState.changeFilter.of(tr => {
             const info = tr.startState.field(editorInfoField, false);
-            if (!tr.docChanged || info?.file?.extension?.toLowerCase() !== "rpad") return true;
+            if (!tr.docChanged || info?.file?.extension?.toLowerCase() !== "inv") return true;
             // File reloads are authoritative; only guard editor edits, never roll back external files.
             if (tr.annotation(Transaction.remote)) return true;
             // Obsidian may populate a newly created editor with an unannotated transaction.
@@ -168,9 +168,9 @@ class RunPadMarkdown extends Plugin {
             const view = leaf.view;
             if (!(view instanceof MarkdownView)) return;
             const root = view.containerEl;
-            const enabled = view.file?.extension?.toLowerCase() === "rpad";
-            root.classList.toggle("runpad-protected", enabled);
-            let summary = root.querySelector(".runpad-properties");
+            const enabled = view.file?.extension?.toLowerCase() === "inv";
+            root.classList.toggle("invoklet-protected", enabled);
+            let summary = root.querySelector(".invoklet-properties");
             if (!enabled) {
                 // The leaf now shows another file type: stop watching it, otherwise every
                 // keystroke in a regular note would trigger a refresh of all leaves.
@@ -186,7 +186,7 @@ class RunPadMarkdown extends Plugin {
             }
             if (!summary) {
                 summary = root.ownerDocument.createElement("details");
-                summary.className = "runpad-properties";
+                summary.className = "invoklet-properties";
                 summary.dataset.path = view.file.path;
                 summary.setAttribute("aria-label", t("properties.aria-label", { heading: t("properties.heading"), readOnly: t("properties.read-only") }));
                 const heading = root.ownerDocument.createElement("summary");
@@ -245,12 +245,12 @@ class RunPadMarkdown extends Plugin {
         for (const observer of this.observers.values()) observer.disconnect();
         this.observers.clear();
         for (const root of this.tracked) {
-            root.classList.remove("runpad-protected");
-            root.querySelector(".runpad-properties")?.remove();
+            root.classList.remove("invoklet-protected");
+            root.querySelector(".invoklet-properties")?.remove();
         }
         this.tracked.clear();
     }
 }
-module.exports = RunPadMarkdown;
+module.exports = InvokletMarkdown;
 // Exposed for bundle.test.cjs; Obsidian only uses the default export.
 module.exports.localize = t;

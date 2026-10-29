@@ -1,9 +1,9 @@
 {
     "properties.heading": "Propriétés",
     "properties.read-only": "lecture seule",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Titre",
     "placeholder.description": "Description — Markdown, listes, liens",
     "placeholder.documentation": "Documentation supplémentaire",
-    "notice.invalid-structure": "La structure .rpad n’a pas été reconnue. La modification est verrouillée."
+    "notice.invalid-structure": "La structure .inv n’a pas été reconnue. La modification est verrouillée."
 }

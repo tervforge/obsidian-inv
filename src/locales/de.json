@@ -1,9 +1,9 @@
 {
     "properties.heading": "Eigenschaften",
     "properties.read-only": "schreibgeschützt",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Titel",
     "placeholder.description": "Beschreibung – Markdown, Listen, Links",
     "placeholder.documentation": "Zusätzliche Dokumentation",
-    "notice.invalid-structure": "Die .rpad-Struktur wurde nicht erkannt. Die Bearbeitung ist gesperrt."
+    "notice.invalid-structure": "Die .inv-Struktur wurde nicht erkannt. Die Bearbeitung ist gesperrt."
 }

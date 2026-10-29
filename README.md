@@ -1,28 +1,32 @@
-# RunPad Markdown 0.3.6
+# Invoklet Markdown 0.4.0
 
-View your [RunPad](https://github.com/campforge/run-pad) scripts in Obsidian. The plugin opens
-`.rpad` files in Obsidian's own Markdown editor: the notes read as a normal note, the code shows
-as a C# or Visual Basic block, and the parts RunPad needs — the YAML header and the run block's
+Version 0.4.0 registers `.inv` files for Invoklet 0.10.1 and later. Rename existing `.rpad`
+scripts to `.inv`; their Markdown/YAML contents do not change. This release uses the plugin ID
+`invoklet-markdown`: disable the old RunPad Markdown plugin before installing the new folder.
+
+View your [Invoklet](https://github.com/tervforge/invoklet) scripts in Obsidian. The plugin opens
+`.inv` files in Obsidian's own Markdown editor: the notes read as a normal note, the code shows
+as a C# or Visual Basic block, and the parts Invoklet needs — the YAML header and the run block's
 fences — are protected from accidental edits.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
-  <img alt="A RunPad script open in Obsidian: a collapsed Properties section, the title and notes as Markdown, and the C# code block" src="docs/screenshot-light.png">
+  <img alt="A Invoklet script open in Obsidian: a collapsed Properties section, the title and notes as Markdown, and the C# code block" src="docs/screenshot-light.png">
 </picture>
 
 The user guide has a page about it:
-[View your scripts in Obsidian](https://campforge.github.io/run-pad-docs/obsidian/).
+[View your scripts in Obsidian](https://tervforge.github.io/invoklet-docs/obsidian/).
 
 ## Installation / update
 
-1. Download [**runpad-markdown.zip**](https://github.com/campforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip)
-   from the [latest release](https://github.com/campforge/obsidian-rpad/releases/latest).
+1. Download [**invoklet-markdown.zip**](https://github.com/tervforge/obsidian-inv/releases/latest/download/invoklet-markdown.zip)
+   from the [latest release](https://github.com/tervforge/obsidian-inv/releases/latest).
 2. Unpack it into `<vault>/.obsidian/plugins/`, so that you get
-   `<vault>/.obsidian/plugins/runpad-markdown/` with `main.js`, `manifest.json` and
+   `<vault>/.obsidian/plugins/invoklet-markdown/` with `main.js`, `manifest.json` and
    `styles.css` inside; replace an older copy when updating. (Each release also has the three
-   files separately.) To browse your RunPad scripts, open the **RunPad Queries** folder in
+   files separately.) To browse your Invoklet scripts, open the **Invoklet Queries** folder in
    your Documents folder as the vault.
-3. Restart Obsidian, or disable and re-enable RunPad Markdown in
+3. Restart Obsidian, or disable and re-enable Invoklet Markdown in
    Settings → Community plugins (turn off Restricted mode first if it is on).
 4. If needed, enable Files and links → Detect all file extensions.
 
@@ -165,7 +169,7 @@ title is now created as a single `# ` line, without an extra blank line.
 
 ## Release archive (0.3.6)
 
-Each release now includes `runpad-markdown.zip` for manual installation: unpack it into
+Each release now includes `invoklet-markdown.zip` for manual installation: unpack it into
 `<vault>/.obsidian/plugins/`. The plugin itself is unchanged from 0.3.5.
 
 ## Development
@@ -175,12 +179,12 @@ Requires Node.js 18+. There are no npm dependencies; `package.json` only holds s
 | Command | What it does |
 | --- | --- |
 | `npm run build` (`node build.cjs`) | Writes the plugin to `dist/`: `main.js` (bundles `src/plugin.js`, `src/policy.cjs`, `src/i18n.js` with `src/locales/*.json` and `src/vendor/commonmark.js`), `manifest.json` and `styles.css` (from `src/styles.css`). Adds the current version to `versions.json`. Fails loudly if an expected placeholder is missing from the sources. |
-| `npm run package` | Build, then pack `dist/runpad-markdown.zip` with a `runpad-markdown/` folder inside, ready to unpack into `<vault>/.obsidian/plugins/`. The archive is reproducible: the same sources give the same bytes. |
+| `npm run package` | Build, then pack `dist/invoklet-markdown.zip` with a `invoklet-markdown/` folder inside, ready to unpack into `<vault>/.obsidian/plugins/`. The archive is reproducible: the same sources give the same bytes. |
 | `npm test` | Build, then run `policy.test.cjs`, `bundle.test.cjs` and `i18n.test.cjs`. |
 | `npm run check` | Build, package and test, then fail if `versions.json` is not committed up to date. This is what CI runs. |
 
 `dist/` is not committed. To try a change in a vault, run `npm run build` and copy or symlink
-`dist/` as `<vault>/.obsidian/plugins/runpad-markdown`. `manifest.json` stays in the repository
+`dist/` as `<vault>/.obsidian/plugins/invoklet-markdown`. `manifest.json` stays in the repository
 root because Obsidian's plugin directory reads the latest version from there.
 
 ### Releasing a new version
@@ -189,21 +193,21 @@ root because Obsidian's plugin directory reads the latest version from there.
    of truth; `build.cjs` no longer overwrites it.
 2. Run `npm test` and commit `manifest.json` and `versions.json`.
 3. Push a tag equal to the version, without a `v` prefix (Obsidian requires this):
-   `git tag 0.3.6 && git push origin main 0.3.6`.
+   `git tag 0.4.0 && git push origin main 0.4.0`.
    The **Release** workflow checks that the tag matches `manifest.json` and `versions.json`,
-   builds, packages and tests, and publishes a GitHub release with `runpad-markdown.zip`
+   builds, packages and tests, and publishes a GitHub release with `invoklet-markdown.zip`
    and, separately, `main.js`, `manifest.json` and `styles.css` (the files Obsidian's plugin
    directory and tools like BRAT download).
 
 ### Continuous integration
 
 `.github/workflows/ci.yml` runs `npm run check` on every push to `main` and on pull requests
-and keeps the built `runpad-markdown.zip` as a downloadable artifact of the run.
+and keeps the built `invoklet-markdown.zip` as a downloadable artifact of the run.
 `.github/workflows/release.yml` runs on version tags, as described above.
 
 ### Licenses
 
-RunPad Markdown is released under the [MIT License](LICENSE).
+Invoklet Markdown is released under the [MIT License](LICENSE).
 
 The CommonMark parser (commonmark 0.31.2) is vendored in `src/vendor/` with its license.
 `commonmark-LICENSE.txt` in the repository root is a deliberate copy, because the parser

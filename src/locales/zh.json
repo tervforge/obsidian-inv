@@ -1,9 +1,9 @@
 {
     "properties.heading": "笔记属性",
     "properties.read-only": "只读",
-    "properties.aria-label": "RunPad：{{heading}}，{{readOnly}}",
+    "properties.aria-label": "Invoklet：{{heading}}，{{readOnly}}",
     "placeholder.title": "标题",
     "placeholder.description": "描述 — Markdown、列表、链接",
     "placeholder.documentation": "附加文档",
-    "notice.invalid-structure": "无法识别 .rpad 结构。编辑已锁定。"
+    "notice.invalid-structure": "无法识别 .inv 结构。编辑已锁定。"
 }

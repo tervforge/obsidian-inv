@@ -1,9 +1,9 @@
 {
     "properties.heading": "Propriedades",
     "properties.read-only": "só de leitura",
-    "properties.aria-label": "RunPad: {{heading}}, {{readOnly}}",
+    "properties.aria-label": "Invoklet: {{heading}}, {{readOnly}}",
     "placeholder.title": "Título",
     "placeholder.description": "Descrição — Markdown, listas, ligações",
     "placeholder.documentation": "Documentação adicional",
-    "notice.invalid-structure": "A estrutura .rpad não foi reconhecida. A edição está bloqueada."
+    "notice.invalid-structure": "A estrutura .inv não foi reconhecida. A edição está bloqueada."
 }
